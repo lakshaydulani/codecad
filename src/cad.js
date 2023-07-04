@@ -3,7 +3,7 @@ import { drawCircle,
   draw } from "replicad";
 
 // The replicad code! Not much there!
-export function drawBox(numberOfBlades) {
+export function drawBox(numberOfBlades,baseradius,height,outerradius,innerradius,thickness) {
 
 
   const polarCopies = (shape, count, radius) => {
@@ -27,12 +27,12 @@ export function drawBox(numberOfBlades) {
 
 
   //  const a=0;
-  const baseHeight =.09;
-  const cylinderHeight = 100;
+  const baseHeight =thickness;
+  const cylinderHeight = height;
   const totalHeight = baseHeight + cylinderHeight;
-  const baseRadius = 200;
-  const outerRadiusCylinder = 30;
-  const innerRadiusCylinder = 25;
+  const baseRadius = baseradius;
+  const outerRadiusCylinder = outerradius;
+  const innerRadiusCylinder = innerradius;
   const cylinderWallThickness = outerRadiusCylinder - innerRadiusCylinder;
   const bladeThick = 2;
   //const numberOfBlades = 10;

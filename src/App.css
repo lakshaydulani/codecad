@@ -1,0 +1,35 @@
+
+.heading{
+    align-items: center;
+    display: flex;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.096);
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: 40px;
+}
+
+
+.parameters{
+  align-items: center;
+  justify-content: center;
+   text-align: center;
+   padding-top: 80px;
+   font-size: 30px;
+  
+}
+input{
+  height: 25px;
+   background-color: rgba(255, 192, 203, 0.242);
+   border-radius: 10px;
+}
+
+/* .heading-wrap{
+  height: 10%;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  background-color: red;
+  justify-content: center;
+} */

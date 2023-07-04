@@ -29,9 +29,9 @@ function createBlob(numberOfBlades) {
   });
 }
 
-function createMesh(numberOfBlades) {
+function createMesh(numberOfBlades,baseradius,height,outerradius,innerradius,thickness) {
   return started.then(() => {
-    const box = drawBox(numberOfBlades);
+    const box = drawBox(numberOfBlades,baseradius,height,outerradius,innerradius,thickness);
     // This is how you get the data structure that the replica-three-helper
     // can synchronise with three BufferGeometry
     return {
