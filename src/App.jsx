@@ -67,7 +67,7 @@ export default function ReplicadApp() {
              style={{width:"10%"}}
             id="baseradius"
             type="number"
-            step="10"
+            step="1"
             min="99"
             max="1000"
             value={baseradius}
@@ -76,7 +76,7 @@ export default function ReplicadApp() {
               if (val > 9 && val <= 10000) setBaseRadius(val);
             }}
           /> <br />
-            <label htmlFor="height" style={{paddingRight:"75px"}}>Height</label>
+            <label htmlFor="height" style={{paddingRight:"78px"}}>Height</label>
           <input
              style={{width:"10%"}}
             id="height"
@@ -91,7 +91,7 @@ export default function ReplicadApp() {
             }}
           />
           <br />
-            <label htmlFor="outerradius" style={{paddingRight:"5px"}}>OuterRadius</label>
+            <label htmlFor="outerradius" style={{paddingRight:"9px"}}>OuterRadius</label>
           <input
              style={{width:"10%"}}
             id="outerradius"
@@ -106,7 +106,7 @@ export default function ReplicadApp() {
             }}
           />
           <br />
-            <label htmlFor="innerradius" style={{paddingRight:"8px"}}>InnerRadius</label>
+            <label htmlFor="innerradius" style={{paddingRight:"12px"}}>InnerRadius</label>
           <input
              style={{width:"10%"}}
             id="innerradius"
@@ -121,7 +121,7 @@ export default function ReplicadApp() {
             }}
           />
           <br />
-            <label htmlFor="thickness" style={{paddingRight:"36px"}} >Thickness</label>
+            <label htmlFor="thickness" style={{paddingRight:"38px"}} >Thickness</label>
           <input
              style={{width:"10%"}}
             id="thickness"
@@ -148,7 +148,7 @@ export default function ReplicadApp() {
             <ReplicadMesh edges={mesh.edges} faces={mesh.faces} />
           </ThreeContext>
         ) : (
-          <div
+          <div className="loading-option"
             style={{ display: "flex", alignItems: "center", fontSize: "2em" }}
           >
             Loading...

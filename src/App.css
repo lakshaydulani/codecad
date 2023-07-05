@@ -11,12 +11,19 @@
 }
 
 
+
 .parameters{
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
+  
    text-align: center;
    padding-top: 80px;
    font-size: 30px;
+   /* background-color: rgba(255, 255, 0, 0.146); */
+   margin: auto;
+   border-radius: 20px;
+   /* padding-left: 20px;
+   padding-right: 20px; */
   
 }
 input{
@@ -25,6 +32,15 @@ input{
    border-radius: 10px;
 }
 
+
+.loading-option{
+     height: 555px;
+     padding-top: 20px;
+    justify-content: center;
+    /* background-color: rgba(255, 0, 0, 0.219); */
+    /* align-items: center;
+    text-align: center; */
+}
 /* .heading-wrap{
   height: 10%;
   align-items: center;

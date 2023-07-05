@@ -28,7 +28,7 @@ export default function ThreeContext({ children, ...props }) {
         }}
         dpr={dpr}
         frameloop="demand"
-        camera={{ position: [20, 40, 50] }}
+        camera={{ position: [300, 300, 500] }}
         {...props}
       >
         <OrbitControls />
