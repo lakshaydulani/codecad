@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Form from 'react-bootstrap/Form';
 import FileSaver from "file-saver";
 import { wrap } from "comlink";
 
@@ -44,15 +44,16 @@ export default function ReplicadApp() {
         <div className="heading-wrap">
         <h1 className="heading">Propellar</h1>
         </div>
-         
+            
          <div>
           <div className="parameters">
-          <label htmlFor="numbladesInput" style={{paddingRight:"75px"}}>Blades</label>
-          <input
-          
-             style={{width:"10%"}}
-            id="numbladesInput"
-            type="number"
+            <h2>Parameters</h2>
+     <Form>
+     <Form.Group className="mb-0" controlId="formGroupEmail">
+        <Form.Label className="para-heading">Blades</Form.Label>
+        <div className="inp">
+        <Form.Control type="number" placeholder="" className="inp-box"  id="numbladesInput"
+            
             step="1"
             min="1"
             max="15"
@@ -60,13 +61,15 @@ export default function ReplicadApp() {
             onChange={(e) => {
               const val = parseInt(e.target.value);
               if (val > 0 && val <= 100) setSize(val);
-            }}
-          /> <br />
-            <label htmlFor="baseradius" style={{paddingRight:"75px"}}>Radius</label>
-          <input
-             style={{width:"10%"}}
-            id="baseradius"
-            type="number"
+            }}  />
+        </div>
+        
+      </Form.Group>
+      <Form.Group className="mb-0" controlId="formGroupEmail">
+        <Form.Label className="para-heading">Radius</Form.Label>
+        <div className="inp">
+        <Form.Control type="number" placeholder="" className="inp-box"   id="baseradius"
+           
             step="1"
             min="99"
             max="1000"
@@ -74,13 +77,15 @@ export default function ReplicadApp() {
             onChange={(e) => {
               const val = parseInt(e.target.value);
               if (val > 9 && val <= 10000) setBaseRadius(val);
-            }}
-          /> <br />
-            <label htmlFor="height" style={{paddingRight:"78px"}}>Height</label>
-          <input
-             style={{width:"10%"}}
-            id="height"
-            type="number"
+            }} />
+        </div>
+        
+      </Form.Group>
+      <Form.Group className="mb-0" controlId="formGroupEmail">
+        <Form.Label className="para-heading">Height</Form.Label>
+        <div className="inp">
+        <Form.Control type="number" placeholder="" className="inp-box"   id="height"
+          
             step="1"
             min="1"
             max="1000"
@@ -88,14 +93,14 @@ export default function ReplicadApp() {
             onChange={(e) => {
               const val = parseInt(e.target.value);
               if (val > 0 && val <= 1000) setHeight(val);
-            }}
-          />
-          <br />
-            <label htmlFor="outerradius" style={{paddingRight:"9px"}}>OuterRadius</label>
-          <input
-             style={{width:"10%"}}
-            id="outerradius"
-            type="number"
+            }} />
+        </div>
+        
+      </Form.Group>
+      <Form.Group className="mb-0" controlId="formGroupEmail">
+        <Form.Label className="para-heading">Outer Radius</Form.Label>
+        <div className="inp">
+        <Form.Control type="number" placeholder="" className="inp-box"   id="outerradius"
             step="1"
             min="1"
             max="1000"
@@ -103,14 +108,14 @@ export default function ReplicadApp() {
             onChange={(e) => {
               const val = parseInt(e.target.value);
               if (val > 0 && val <= 1000) setOuterRadius(val);
-            }}
-          />
-          <br />
-            <label htmlFor="innerradius" style={{paddingRight:"12px"}}>InnerRadius</label>
-          <input
-             style={{width:"10%"}}
-            id="innerradius"
-            type="number"
+            }} />
+        </div>
+        
+      </Form.Group>
+      <Form.Group className="mb-0" controlId="formGroupEmail">
+        <Form.Label className="para-heading">Inner Radius</Form.Label>
+        <div className="inp">
+        <Form.Control type="number" placeholder="" className="inp-box"    id="innerradius"
             step="1"
             min="1"
             max="1000"
@@ -118,14 +123,14 @@ export default function ReplicadApp() {
             onChange={(e) => {
               const val = parseInt(e.target.value);
               if (val > 0 && val <= 1000) setInnerRadius(val);
-            }}
-          />
-          <br />
-            <label htmlFor="thickness" style={{paddingRight:"38px"}} >Thickness</label>
-          <input
-             style={{width:"10%"}}
-            id="thickness"
-            type="number"
+            }}  />
+        </div>
+        
+      </Form.Group>
+      <Form.Group className="mb-0" controlId="formGroupEmail">
+        <Form.Label className="para-heading">Thickness</Form.Label>
+        <div className="inp">
+        <Form.Control type="number" placeholder="" className="inp-box"   id="thickness"
             step="1"
             min="1"
             max="1000"
@@ -133,16 +138,18 @@ export default function ReplicadApp() {
             onChange={(e) => {
               const val = parseInt(e.target.value);
               if (val > 0 && val <= 1000) setThickness(val);
-            }}
-          />
-         
+            }} />
+        </div>
+        
+      </Form.Group>
+    </Form>
               </div>
           
         </div>
         {/* <input type="number" /> */}
         {/* <button onClick={downloadModel}>Download STL</button> */}
       </section>
-      <section style={{ height: "100vh", width: "60%" }}>
+      <section style={{ height: "140vh", width: "60%" }}>
         {mesh ? (
           <ThreeContext>
             <ReplicadMesh edges={mesh.edges} faces={mesh.faces} />
