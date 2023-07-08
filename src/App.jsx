@@ -143,7 +143,7 @@ export default function ReplicadApp() {
         
       </Form.Group>
     </Form>
-          <button className="btn-download">Download</button>
+          <button className="btn-download">Downlad</button>
               </div>
            
         </div>
