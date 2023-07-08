@@ -39,11 +39,33 @@
     align-items: center;
     justify-content: center;
     padding-left: 60px;
+    /* border-style: solid; */
+    /* border-radius: 100px; */
+    /* border-color: grey; */
+    /* border-width: 2px; */
+
 }
+/* .form-control:focus {
+    box-shadow: red;
+    outline: red;
+  } */
 .inp-box{
     width: 80%;
     justify-content: center;
     text-align: center;
+    
+     box-shadow:pink;
+     border-style: solid;
+     border-radius: 15px;
+     border-color: grey;
+     outline: none;
+
+     /* border-style: none; background-color: white; font-size: 13px; font-weight: bold; color: black; */
+     /* border-width: 10px; */
+     /* border-block-start-color: black; */
+
+
+    /* mask-border-outset: red; */
 }
 .para-heading{
     font-size: 25px;
@@ -58,7 +80,17 @@ input{
    border-width: 5px;
    border-color: rgba(255, 0, 0, 0.155);
 }
-
+.btn-download {
+    background-color: rgb(47, 101, 173);
+    color: white;
+    font-size: 20px;
+    /* padding: 10px 60px; */
+    border-radius: 5px;
+    margin: 10px 0px;
+    cursor: pointer;
+  
+    box-shadow:red ;
+  }
 
 .loading-option{
      height: 555px;

@@ -143,8 +143,9 @@ export default function ReplicadApp() {
         
       </Form.Group>
     </Form>
+          <button className="btn-download">Download</button>
               </div>
-          
+           
         </div>
         {/* <input type="number" /> */}
         {/* <button onClick={downloadModel}>Download STL</button> */}
