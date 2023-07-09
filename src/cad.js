@@ -45,14 +45,14 @@ export function drawBox(numberOfBlades,baseradius,height,outerradius,innerradius
     .extrude(cylinderHeight)
     .shell(cylinderWallThickness, (f) => f.inPlane("XY", totalHeight));
 
-  const base = drawCircle(baseRadius)
-    .sketchOnPlane(makePlane("XY"))
+  const base = drawCircle(baseRadius+1)
+    .sketchOnPlane(makePlane("XY",[0,0,0]))
     .extrude(baseHeight);
 
   const baseCylinderFused = base.fuse(cirCylind);
 
 
-  const bladeShape = draw([bladeStart, 0])
+  const bladeShape = draw([bladeStart, 0,baseHeight])
     .vLine(bladeThick)
     .bulgeArcTo([baseRadius, 6], -.4)
     .vLine(-4)
