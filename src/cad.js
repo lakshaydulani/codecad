@@ -52,7 +52,7 @@ export function drawBox(numberOfBlades,baseradius,height,outerradius,innerradius
   const baseCylinderFused = base.fuse(cirCylind);
 
 
-  const bladeShape = draw([bladeStart, 0,baseHeight])
+  const bladeShape = draw([bladeStart, 0,0])
     .vLine(bladeThick)
     .bulgeArcTo([baseRadius, 6], -.4)
     .vLine(-4)

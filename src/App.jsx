@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 import FileSaver from "file-saver";
 import { wrap } from "comlink";
@@ -13,6 +13,8 @@ import ReplicadMesh from "./ReplicadMesh.jsx";
 import cadWorker from "./worker.js?worker";
 
 import "./App.css";
+
+import loading from "./loading.gif";
 const cad = wrap(new cadWorker());
 
 export default function ReplicadApp() {
@@ -24,14 +26,16 @@ export default function ReplicadApp() {
   const [thickness, setThickness] = useState(5);
 
   const downloadModel = async () => {
-    const blob = await cad.createBlob(size,baseradius,height,outerRadius,innerRadius,thickness);
-    FileSaver.saveAs(blob, "thing.stl");
+    const blob = await cad.createBlob(
+      size,
+      baseradius,
+      height,
+      outerRadius,
+      innerRadius,
+      thickness
+    );
+    FileSaver.saveAs(blob, "impellar.stl");
   };
-
-  // const downloadModel = async () => {
-  //   const blob = await cad.createBlob(baseradius);
-  //   FileSaver.saveAs(blob, "thing.stl");
-  // };
 
   const [mesh, setMesh] = useState(null);
 
@@ -47,7 +51,7 @@ export default function ReplicadApp() {
         display: "flex",
       }}
     >
-      <section style={{ width: "40%" }}>
+      <section style={{ width: "40%" , }}>
         <div className="heading-wrap">
           <h1 className="heading">Impellar</h1>
         </div>
@@ -56,7 +60,7 @@ export default function ReplicadApp() {
           <div className="heading-p">
             <h2>Set Characteristics of Impellar</h2>
           </div>
-       
+
           <div className="parameters">
             <Form>
               <Form.Group
@@ -64,187 +68,228 @@ export default function ReplicadApp() {
                 className="mb-3"
                 controlId="formPlaintextPassword"
               >
-                <Form.Label column sm="3" className="label-c">
-                Blades
+                <Form.Label column sm="4" className="label-c">
+                  Blades
                 </Form.Label>
+
                 <Col sm="8">
-                  <div className="inp">
-                    {" "}
-                    <Form.Control
-                      className="inp-box"
-                      size="lg"
-                      type="number"
-                      placeholder=""
-                      step="1"
-                      min="1"
-                      max="15"
-                      value={size}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val > 0 && val <= 100) setSize(val);
-                      }} 
-                    />{" "}
-                  </div>
+                  {" "}
+                  <Form.Control
+                    className="inp-box"
+                    size="lg"
+                    type="number"
+                    placeholder=""
+                    step="1"
+                    min="1"
+                    max="25"
+                    value={size}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val > 0 && val <= 25) setSize(val);
+                    }}
+                  />{" "}
                 </Col>
+                <small
+                    className="description"
+                  style={{
+                   
+                   
+                  }}
+                >
+                  Max25
+                </small>
               </Form.Group>
               <Form.Group
                 as={Row}
                 className="mb-3"
                 controlId="formPlaintextPassword"
               >
-                <Form.Label column sm="3" className="label-c">
+                <Form.Label column sm="4" className="label-c">
                   Radius
                 </Form.Label>
                 <Col sm="8">
-                  <div className="inp">
-                    {" "}
-                    <Form.Control
-                      className="inp-box"
-                      size="lg"
-                      type="number"
-                      placeholder=""
-                      step="1"
-                      min="99"
-                      max="1000"
-                      value={baseradius}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val > 9 && val <= 10000) setBaseRadius(val);
-                      }}
-                    />{" "}
-                  </div>
+                  {" "}
+                  <Form.Control
+                    className="inp-box"
+                    size="lg"
+                    type="number"
+                    placeholder=""
+                    step="1"
+                    min="99"
+                    max="500"
+                    value={baseradius}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val > 0 && val <= 500) setBaseRadius(val);
+                    }}
+                  />{" "}
                 </Col>
+                <small
+                className="description"
+                  style={{
+                    
+                  }}
+                >
+                  Max500
+                </small>
               </Form.Group>
               <Form.Group
                 as={Row}
                 className="mb-3"
                 controlId="formPlaintextPassword"
               >
-                <Form.Label column sm="3" className="label-c">
+                <Form.Label column sm="4" className="label-c">
                   Height
                 </Form.Label>
                 <Col sm="8">
-                  <div className="inp">
-                    {" "}
-                    <Form.Control
-                      className="inp-box"
-                      size="lg"
-                      type="number"
-                      placeholder=""
-                      step="1"
-                      min="1"
-                      max="1000"
-                      value={height}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val > 0 && val <= 1000) setHeight(val);
-                      }}
-                    />{" "}
-                  </div>
+                  {" "}
+                  <Form.Control
+                    className="inp-box"
+                    size="lg"
+                    type="number"
+                    placeholder=""
+                    step="1"
+                    min="1"
+                    max="500"
+                    value={height}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val > 0 && val <= 500) setHeight(val);
+                    }}
+                  />{" "}
                 </Col>
+                <small
+                 className="description"
+                  style={{
+                  
+                  }}
+                >
+                  Max500
+                </small>
               </Form.Group>
               <Form.Group
                 as={Row}
                 className="mb-3"
                 controlId="formPlaintextPassword"
               >
-                <Form.Label column sm="3" className="label-c" >
+                <Form.Label column sm="4" className="label-c">
                   OuterRadius
                 </Form.Label>
                 <Col sm="8">
-                  <div className="inp">
-                    {" "}
-                    <Form.Control
-                      className="inp-box"
-                      size="lg"
-                      type="number"
-                      placeholder=""
-                      step="1"
-                      min="1"
-                      max="1000"
-                      value={outerRadius}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val > 0 && val <= 1000) setOuterRadius(val);
-                      }}
-                    />{" "}
-                  </div>
+                  {" "}
+                  <Form.Control
+                    className="inp-box"
+                    size="lg"
+                    type="number"
+                    placeholder=""
+                    step="1"
+                    min="1"
+                    max={baseradius}
+                    value={outerRadius}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val > 0 && val < 500) setOuterRadius(val);
+                    }}
+                  />{" "}
                 </Col>
+                <small
+                className="description"
+                  style={{
+                    marginLeft:"275px"
+                  }}
+                >
+                  LessThanRadius
+                </small>
               </Form.Group>
               <Form.Group
                 as={Row}
                 className="mb-3"
                 controlId="formPlaintextPassword"
               >
-                <Form.Label column sm="3" className="label-c">
-               InnerRadius
+                <Form.Label column sm="4" className="label-c">
+                  InnerRadius
                 </Form.Label>
                 <Col sm="8">
-                  <div className="inp">
-                    {" "}
-                    <Form.Control
-                      className="inp-box"
-                      size="lg"
-                      type="number"
-                      placeholder=""
-                      step="1"
-                      min="1"
-                      max="1000"
-                      value={innerRadius}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val > 0 && val <= 1000) setInnerRadius(val);
-                      }} 
-                    />{" "}
-                  </div>
+                  {" "}
+                  <Form.Control
+                    className="inp-box"
+                    size="lg"
+                    type="number"
+                    placeholder=""
+                    step="1"
+                    min="1"
+                    max="499"
+                    value={innerRadius}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val > 0 && val < 499) setInnerRadius(val);
+                    }}
+                  />{" "}
                 </Col>
+                <small
+                 className="description"
+                  style={{
+                    marginLeft:"249px"
+                  }}
+                >
+                  LessThanOuterRadius
+                </small>
               </Form.Group>
               <Form.Group
                 as={Row}
                 className="mb-3"
                 controlId="formPlaintextPassword"
               >
-                <Form.Label column sm="3" className="label-c">
+                <Form.Label column sm="4" className="label-c">
                   Thickness
                 </Form.Label>
                 <Col sm="8">
-                  <div className="inp">
-                    {" "}
-                    <Form.Control
-                      className="inp-box"
-                      size="lg"
-                      type="number"
-                      placeholder=""
-                      step="1"
-                      min="1"
-                      max="1000"
-                      value={thickness}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value);
-                        if (val > 0 && val <= 1000) setThickness(val);
-                      }} 
-                    />{" "}
-                  </div>
+                  {" "}
+                  <Form.Control
+                    className="inp-box"
+                    size="lg"
+                    type="number"
+                    placeholder=""
+                    step="1"
+                    min="1"
+                    max="100"
+                    value={thickness}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (val > 0 && val <= 100) setThickness(val);
+                    }}
+                  />{" "}
                 </Col>
+                <small
+                 className="description"
+                  style={{
+                 
+                  }}
+                >
+                  Max100
+                </small>
               </Form.Group>
             </Form>
 
             {/* <button className="btn-download">Downlad</button> */}
           </div>
           <div className="d-grid gap-2">
-       <div className="btn-downc">
-       <Button onClick={downloadModel} variant="secondary" size="lg"  style={{paddingRight:"20px",width:"80%",fontSize:"25px"}}>
-        Download
-      </Button>
-       </div>
-     
-
-    </div>
+            <div className="btn-downc">
+              <Button
+                onClick={downloadModel}
+                variant="secondary"
+                size="lg"
+                style={{ paddingRight: "20px", width: "80%", fontSize: "25px" }}
+              >
+                Download
+              </Button>
+            </div>
+          </div>
         </div>
         {/* <input type="number" /> */}
         {/* <button onClick={downloadModel}>Download STL</button> */}
       </section>
-      <section style={{ height: "100vh", width: "60%" }}>
+      <section style={{ height: "100vh", width: "60%",paddingTop:"100px"}}>
         {mesh ? (
           <ThreeContext>
             <ReplicadMesh edges={mesh.edges} faces={mesh.faces} />
@@ -254,7 +299,7 @@ export default function ReplicadApp() {
             className="loading-option"
             style={{ display: "flex", alignItems: "center", fontSize: "2em" }}
           >
-            Loading...
+            <img src={loading} alt="Loading" className="loading-gif" />
           </div>
         )}
       </section>
