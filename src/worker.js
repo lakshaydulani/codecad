@@ -25,7 +25,7 @@ const started = init();
 function createBlob(numberOfBlades,radius,height,outerradius,innerradius,thickness) {
   // note that you might want to do some caching for more complex models
   return started.then(() => {
-    return drawBox(numberOfBlades,radius,height,outerradius,innerradius,thickness).blobSTL();
+    return drawBox(numberOfBlades,radius,height,outerradius,innerradius,thickness).blobSTEP();
   });
 }
 

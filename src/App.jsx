@@ -9,7 +9,7 @@ import { wrap } from "comlink";
 
 import ThreeContext from "./ThreeContext.jsx";
 import ReplicadMesh from "./ReplicadMesh.jsx";
-
+import Alert from "./Alert.jsx";
 import cadWorker from "./worker.js?worker";
 
 import "./App.css";
@@ -34,7 +34,7 @@ export default function ReplicadApp() {
       innerRadius,
       thickness
     );
-    FileSaver.saveAs(blob, "impellar.stl");
+    FileSaver.saveAs(blob, "impellar.step");
   };
 
   const [mesh, setMesh] = useState(null);
@@ -52,6 +52,7 @@ export default function ReplicadApp() {
       }}
     >
       <section style={{ width: "40%" , }}>
+        <Alert/>
         <div className="heading-wrap">
           <h1 className="heading">Impellar</h1>
         </div>
