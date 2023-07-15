@@ -62,7 +62,7 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-input{
+/* input{
   height: 30px;
    background-color: rgba(255, 192, 203, 0.242);
    border-radius: 10px;
@@ -70,22 +70,26 @@ input{
    border-width: 5px;
    border-color: rgba(255, 0, 0, 0.155);
 
-}
+} */
 
 .btn-downc{
   padding-left: 75px;
   font-family:cursive;
 
 }
-.btn-download {
-    background-color: rgb(47, 101, 173);
-    color: white;
-    font-size: 20px;
-    border-radius: 5px;
-    margin: 10px 0px;
-    cursor: pointer;  
-    box-shadow:red ;
-  }
+
+.requirement-sty{
+    margin-top: 40px;
+    text-align: center;
+    font-size: 25px;
+    font-family:cursive;
+}
+.btn-submit{
+font-family:cursive;
+width: 50%;
+margin-left: 120px;
+
+}
 
 .loading-gif{
     width: 50px;

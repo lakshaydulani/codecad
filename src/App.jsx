@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import FileSaver from "file-saver";
 import { wrap } from "comlink";
 
+import Requirement from "./Requirement.jsx";
 import ThreeContext from "./ThreeContext.jsx";
 import ReplicadMesh from "./ReplicadMesh.jsx";
 import Alert from "./Alert.jsx";
@@ -51,8 +52,8 @@ export default function ReplicadApp() {
         display: "flex",
       }}
     >
-      <section style={{ width: "40%" , }}>
-        <Alert/>
+      <section style={{ width: "40%", backgroundColor: "white" }}>
+        <Alert />
         <div className="heading-wrap">
           <h1 className="heading">Impellar</h1>
         </div>
@@ -90,13 +91,7 @@ export default function ReplicadApp() {
                     }}
                   />{" "}
                 </Col>
-                <small
-                    className="description"
-                  style={{
-                   
-                   
-                  }}
-                >
+                <small className="description" style={{}}>
                   Max25
                 </small>
               </Form.Group>
@@ -125,12 +120,7 @@ export default function ReplicadApp() {
                     }}
                   />{" "}
                 </Col>
-                <small
-                className="description"
-                  style={{
-                    
-                  }}
-                >
+                <small className="description" style={{}}>
                   Max500
                 </small>
               </Form.Group>
@@ -159,12 +149,7 @@ export default function ReplicadApp() {
                     }}
                   />{" "}
                 </Col>
-                <small
-                 className="description"
-                  style={{
-                  
-                  }}
-                >
+                <small className="description" style={{}}>
                   Max500
                 </small>
               </Form.Group>
@@ -194,9 +179,9 @@ export default function ReplicadApp() {
                   />{" "}
                 </Col>
                 <small
-                className="description"
+                  className="description"
                   style={{
-                    marginLeft:"275px"
+                    marginLeft: "275px",
                   }}
                 >
                   LessThanRadius
@@ -228,9 +213,9 @@ export default function ReplicadApp() {
                   />{" "}
                 </Col>
                 <small
-                 className="description"
+                  className="description"
                   style={{
-                    marginLeft:"249px"
+                    marginLeft: "249px",
                   }}
                 >
                   LessThanOuterRadius
@@ -261,12 +246,7 @@ export default function ReplicadApp() {
                     }}
                   />{" "}
                 </Col>
-                <small
-                 className="description"
-                  style={{
-                 
-                  }}
-                >
+                <small className="description" style={{}}>
                   Max100
                 </small>
               </Form.Group>
@@ -289,8 +269,10 @@ export default function ReplicadApp() {
         </div>
         {/* <input type="number" /> */}
         {/* <button onClick={downloadModel}>Download STL</button> */}
+        <Requirement />
       </section>
-      <section style={{ height: "100vh", width: "60%",paddingTop:"100px"}}>
+
+      <section style={{ height: "100vh", width: "60%", paddingTop: "100px" }}>
         {mesh ? (
           <ThreeContext>
             <ReplicadMesh edges={mesh.edges} faces={mesh.faces} />
