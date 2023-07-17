@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -19,40 +20,59 @@ import loading from "./loading.gif";
 const cad = wrap(new cadWorker());
 
 export default function ReplicadApp() {
-  const [size, setSize] = useState(5);
-  const [baseradius, setBaseRadius] = useState(200);
-  const [height, setHeight] = useState(100);
-  const [outerRadius, setOuterRadius] = useState(30);
-  const [innerRadius, setInnerRadius] = useState(25);
-  const [thickness, setThickness] = useState(5);
+  const [formData, setFormData] = useState({
+    size: 5,
+    baseradius: 200,
+    height: 100,
+    outerRadius: 30,
+    innerRadius: 25,
+    thickness: 5,
+  });
 
-  const downloadModel = async () => {
-    const blob = await cad.createBlob(
-      size,
-      baseradius,
-      height,
-      outerRadius,
-      innerRadius,
-      thickness
-    );
-    FileSaver.saveAs(blob, "impellar.step");
-  };
+  const [latestFormData, setLatestFormData] = useState({});
 
   const [mesh, setMesh] = useState(null);
 
   useEffect(() => {
     cad
-      .createMesh(size, baseradius, height, outerRadius, innerRadius, thickness)
+      .createMesh(
+        latestFormData.size || formData.size,
+        latestFormData.baseradius || formData.baseradius,
+        latestFormData.height || formData.height,
+        latestFormData.outerRadius || formData.outerRadius,
+        latestFormData.innerRadius || formData.innerRadius,
+        latestFormData.thickness || formData.thickness
+      )
       .then((m) => setMesh(m));
-  }, [size, baseradius, height, outerRadius, innerRadius, thickness]);
+  }, [latestFormData]);          // Ye  dependency hai , when latestformdata changes , on clicking generate button 
+
+  const downloadModel = async () => {
+    const blob = await cad.createBlob(
+      latestFormData.size || formData.size,
+      latestFormData.baseradius || formData.baseradius,
+      latestFormData.height || formData.height,
+      latestFormData.outerRadius || formData.outerRadius,
+      latestFormData.innerRadius || formData.innerRadius,
+      latestFormData.thickness || formData.thickness
+    );
+    FileSaver.saveAs(blob, "impellar.step");
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: parseInt(value),
+    }));
+  };
+
+  const generateModel = () => {
+    setLatestFormData(formData);
+  };
 
   return (
-    <main
-      style={{
-        display: "flex",
-      }}
-    >
-      <section style={{ width: "40%", backgroundColor: "white" }}>
+    <main style={{ display: "flex" }}>
+      <section style={{ width: "40%", backgroundColor: "pink" }}>
         <Alert />
         <div className="heading-wrap">
           <h1 className="heading">Impellar</h1>
@@ -75,7 +95,6 @@ export default function ReplicadApp() {
                 </Form.Label>
 
                 <Col sm="8">
-                  {" "}
                   <Form.Control
                     className="inp-box"
                     size="lg"
@@ -84,16 +103,12 @@ export default function ReplicadApp() {
                     step="1"
                     min="1"
                     max="25"
-                    value={size}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (val > 0 && val <= 25) setSize(val);
-                    }}
-                  />{" "}
+                    name="size"
+                    value={formData.size}
+                    onChange={handleInputChange}
+                  />
                 </Col>
-                <small className="description" style={{}}>
-                  Max25
-                </small>
+                <small className="description">Max 25</small>
               </Form.Group>
               <Form.Group
                 as={Row}
@@ -104,7 +119,6 @@ export default function ReplicadApp() {
                   Radius
                 </Form.Label>
                 <Col sm="8">
-                  {" "}
                   <Form.Control
                     className="inp-box"
                     size="lg"
@@ -113,16 +127,12 @@ export default function ReplicadApp() {
                     step="1"
                     min="99"
                     max="500"
-                    value={baseradius}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (val > 0 && val <= 500) setBaseRadius(val);
-                    }}
-                  />{" "}
+                    name="baseradius"
+                    value={formData.baseradius}
+                    onChange={handleInputChange}
+                  />
                 </Col>
-                <small className="description" style={{}}>
-                  Max500
-                </small>
+                <small className="description">Max 500</small>
               </Form.Group>
               <Form.Group
                 as={Row}
@@ -133,7 +143,6 @@ export default function ReplicadApp() {
                   Height
                 </Form.Label>
                 <Col sm="8">
-                  {" "}
                   <Form.Control
                     className="inp-box"
                     size="lg"
@@ -142,16 +151,12 @@ export default function ReplicadApp() {
                     step="1"
                     min="1"
                     max="500"
-                    value={height}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (val > 0 && val <= 500) setHeight(val);
-                    }}
-                  />{" "}
+                    name="height"
+                    value={formData.height}
+                    onChange={handleInputChange}
+                  />
                 </Col>
-                <small className="description" style={{}}>
-                  Max500
-                </small>
+                <small className="description">Max 500</small>
               </Form.Group>
               <Form.Group
                 as={Row}
@@ -162,7 +167,6 @@ export default function ReplicadApp() {
                   OuterRadius
                 </Form.Label>
                 <Col sm="8">
-                  {" "}
                   <Form.Control
                     className="inp-box"
                     size="lg"
@@ -170,22 +174,13 @@ export default function ReplicadApp() {
                     placeholder=""
                     step="1"
                     min="1"
-                    max={baseradius}
-                    value={outerRadius}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (val > 0 && val < 500) setOuterRadius(val);
-                    }}
-                  />{" "}
+                    max={formData.baseradius}
+                    name="outerRadius"
+                    value={formData.outerRadius}
+                    onChange={handleInputChange}
+                  />
                 </Col>
-                <small
-                  className="description"
-                  style={{
-                    marginLeft: "275px",
-                  }}
-                >
-                  LessThanRadius
-                </small>
+                <small className="description">Less Than Radius</small>
               </Form.Group>
               <Form.Group
                 as={Row}
@@ -196,7 +191,6 @@ export default function ReplicadApp() {
                   InnerRadius
                 </Form.Label>
                 <Col sm="8">
-                  {" "}
                   <Form.Control
                     className="inp-box"
                     size="lg"
@@ -205,21 +199,12 @@ export default function ReplicadApp() {
                     step="1"
                     min="1"
                     max="499"
-                    value={innerRadius}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (val > 0 && val < 499) setInnerRadius(val);
-                    }}
-                  />{" "}
+                    name="innerRadius"
+                    value={formData.innerRadius}
+                    onChange={handleInputChange}
+                  />
                 </Col>
-                <small
-                  className="description"
-                  style={{
-                    marginLeft: "249px",
-                  }}
-                >
-                  LessThanOuterRadius
-                </small>
+                <small className="description">Less Than OuterRadius</small>
               </Form.Group>
               <Form.Group
                 as={Row}
@@ -230,7 +215,6 @@ export default function ReplicadApp() {
                   Thickness
                 </Form.Label>
                 <Col sm="8">
-                  {" "}
                   <Form.Control
                     className="inp-box"
                     size="lg"
@@ -239,37 +223,43 @@ export default function ReplicadApp() {
                     step="1"
                     min="1"
                     max="100"
-                    value={thickness}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (val > 0 && val <= 100) setThickness(val);
-                    }}
-                  />{" "}
+                    name="thickness"
+                    value={formData.thickness}
+                    onChange={handleInputChange}
+                  />
                 </Col>
-                <small className="description" style={{}}>
-                  Max100
-                </small>
+                <small className="description">Max 100</small>
               </Form.Group>
             </Form>
+            <div className="d-grid gap-2">
+              <div className="btn-downc">
 
-            {/* <button className="btn-download">Downlad</button> */}
-          </div>
-          <div className="d-grid gap-2">
-            <div className="btn-downc">
-              <Button
+                <Button
+                  onClick={generateModel}
+                  variant="secondary"
+                  size="lg"
+                  style={{
+                    paddingRight: "20px",
+                    width: "80%",
+                    fontSize: "25px",
+                    marginLeft:""
+                  }}
+                >
+                  Generate
+                </Button>
+                <Button
                 onClick={downloadModel}
                 variant="secondary"
                 size="lg"
-                style={{ paddingRight: "20px", width: "80%", fontSize: "25px" }}
+                style={{ paddingRight: "20px", width: "80%", fontSize: "25px" ,marginTop:"10px"}}
               >
                 Download
               </Button>
+              </div>
             </div>
           </div>
+          <Requirement />
         </div>
-        {/* <input type="number" /> */}
-        {/* <button onClick={downloadModel}>Download STL</button> */}
-        <Requirement />
       </section>
 
       <section style={{ height: "100vh", width: "60%", paddingTop: "100px" }}>
@@ -278,10 +268,7 @@ export default function ReplicadApp() {
             <ReplicadMesh edges={mesh.edges} faces={mesh.faces} />
           </ThreeContext>
         ) : (
-          <div
-            className="loading-option"
-            style={{ display: "flex", alignItems: "center", fontSize: "2em" }}
-          >
+          <div className="loading-option">
             <img src={loading} alt="Loading" className="loading-gif" />
           </div>
         )}
