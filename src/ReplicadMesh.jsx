@@ -47,7 +47,7 @@ export default React.memo(function ShapeMeshes({ faces, edges }) {
         />
       </mesh>
       <lineSegments geometry={lines.current}>
-        <lineBasicMaterial color="#3c5a6e" />
+        <lineBasicMaterial color="#000000" />
       </lineSegments>
     </group>
   );

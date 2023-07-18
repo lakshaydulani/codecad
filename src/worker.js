@@ -5,6 +5,7 @@ import { expose } from "comlink";
 
 // We import our model as a simple function
 import { drawBox } from "./cad";
+import { debounce } from "lodash";
 
 // This is the logic to load the web assembly code into replicad
 let loaded = false;
@@ -22,23 +23,23 @@ const init = async () => {
 };
 const started = init();
 
-function createBlob(numberOfBlades,radius,height,outerradius,innerradius,thickness) {
+function createBlob(numberOfBlades, radius, height, outerradius, innerradius, thickness) {
   // note that you might want to do some caching for more complex models
   return started.then(() => {
-    return drawBox(numberOfBlades,radius,height,outerradius,innerradius,thickness).blobSTEP();
+    return drawBox(numberOfBlades, radius, height, outerradius, innerradius, thickness).blobSTEP();
   });
 }
 
-function createMesh(numberOfBlades,baseradius,height,outerradius,innerradius,thickness) {
+function createMesh(numberOfBlades, baseradius, height, outerradius, innerradius, thickness) {
   return started.then(() => {
-    const box = drawBox(numberOfBlades,baseradius,height,outerradius,innerradius,thickness);
-    // This is how you get the data structure that the replica-three-helper
-    // can synchronise with three BufferGeometry
-    return {
-      faces: box.mesh(),
-      edges: box.meshEdges(),
-    };
-  });
+      const box = drawBox(numberOfBlades, baseradius, height, outerradius, innerradius, thickness);
+      // This is how you get the data structure that the replica-three-helper
+      // can synchronise with three BufferGeometry
+      return {
+        faces: box.mesh(),
+        edges: box.meshEdges(),
+      };
+    });
 }
 
 // comlink is great to expose your functions within the worker as a simple API

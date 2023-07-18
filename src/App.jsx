@@ -13,10 +13,13 @@ import ThreeContext from "./ThreeContext.jsx";
 import ReplicadMesh from "./ReplicadMesh.jsx";
 import Alert from "./Alert.jsx";
 import cadWorker from "./worker.js?worker";
+// import { debounce } from "lodash";
+
 
 import "./App.css";
 
-import loading from "./loading.gif";
+import { Loader } from "@react-three/drei";
+// import { Color } from "three";
 const cad = wrap(new cadWorker());
 
 export default function ReplicadApp() {
@@ -71,206 +74,233 @@ export default function ReplicadApp() {
   };
 
   return (
-    <main style={{ display: "flex" }}>
-      <section style={{ width: "40%", backgroundColor: "pink" }}>
+    <main
+      style={{
+        display: "flex",
+      }}
+    >
+      <section style={{ width: "45%", }}>
         <Alert />
-        <div className="heading-wrap">
-          <h1 className="heading">Impellar</h1>
+        <div className="heading-wrap mb-5 logo-text bg-dark text-white">
+          <h1 className="heading">Centrifugal Fan Designer</h1>
         </div>
+        <div className="parameters px-2">
+          <Form className="mb-4 mx-5">
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="formPlaintextPassword"
+            >
+              <Form.Label column sm="5" className="label-c">
+                Number of Blades
+              </Form.Label>
 
-        <div>
-          <div className="heading-p">
-            <h2>Set Characteristics of Impellar</h2>
-          </div>
-
-          <div className="parameters">
-            <Form>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="4" className="label-c">
-                  Blades
-                </Form.Label>
-
-                <Col sm="8">
-                  <Form.Control
-                    className="inp-box"
-                    size="lg"
-                    type="number"
-                    placeholder=""
-                    step="1"
-                    min="1"
-                    max="25"
-                    name="size"
-                    value={formData.size}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <small className="description">Max 25</small>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="4" className="label-c">
-                  Radius
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    className="inp-box"
-                    size="lg"
-                    type="number"
-                    placeholder=""
-                    step="1"
-                    min="99"
-                    max="500"
-                    name="baseradius"
-                    value={formData.baseradius}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <small className="description">Max 500</small>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="4" className="label-c">
-                  Height
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    className="inp-box"
-                    size="lg"
-                    type="number"
-                    placeholder=""
-                    step="1"
-                    min="1"
-                    max="500"
-                    name="height"
-                    value={formData.height}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <small className="description">Max 500</small>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="4" className="label-c">
-                  OuterRadius
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    className="inp-box"
-                    size="lg"
-                    type="number"
-                    placeholder=""
-                    step="1"
-                    min="1"
-                    max={formData.baseradius}
-                    name="outerRadius"
-                    value={formData.outerRadius}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <small className="description">Less Than Radius</small>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="4" className="label-c">
-                  InnerRadius
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    className="inp-box"
-                    size="lg"
-                    type="number"
-                    placeholder=""
-                    step="1"
-                    min="1"
-                    max="499"
-                    name="innerRadius"
-                    value={formData.innerRadius}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <small className="description">Less Than OuterRadius</small>
-              </Form.Group>
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="formPlaintextPassword"
-              >
-                <Form.Label column sm="4" className="label-c">
-                  Thickness
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    className="inp-box"
-                    size="lg"
-                    type="number"
-                    placeholder=""
-                    step="1"
-                    min="1"
-                    max="100"
-                    name="thickness"
-                    value={formData.thickness}
-                    onChange={handleInputChange}
-                  />
-                </Col>
-                <small className="description">Max 100</small>
-              </Form.Group>
-            </Form>
-            <div className="d-grid gap-2">
-              <div className="btn-downc">
-
-                <Button
-                  onClick={generateModel}
-                  variant="secondary"
+              <Col sm="7">
+                <Form.Control
+                  className="inp-box"
                   size="lg"
-                  style={{
-                    paddingRight: "20px",
-                    width: "80%",
-                    fontSize: "25px",
-                    marginLeft:""
-                  }}
+                  type="number"
+                  placeholder=""
+                  step="1"
+                  min="1"
+                  max="25"
+                  value={formData.size}
+                  onChange={handleInputChange}
+                />
+                <small
+                  className="description"
                 >
-                  Generate
-                </Button>
-                <Button
-                onClick={downloadModel}
-                variant="secondary"
-                size="lg"
-                style={{ paddingRight: "20px", width: "80%", fontSize: "25px" ,marginTop:"10px"}}
+                  Recommended number of plates is between 8 to 15.
+                </small>
+              </Col>
+
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="formPlaintextPassword"
+            >
+              <Form.Label column sm="5" className="label-c">
+                Base Plate Diameter
+              </Form.Label>
+              <Col sm="7">
+                <Form.Control
+                  className="inp-box"
+                  size="lg"
+                  type="number"
+                  placeholder=""
+                  step="1"
+                  min="99"
+                  max="500"
+                  name="baseradius"
+                  value={formData.baseradius}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <small
+                className="description"
               >
-                Download
-              </Button>
-              </div>
+                This is the Diameter of the base plate.
+              </small>
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="formPlaintextPassword"
+            >
+              <Form.Label column sm="5" className="label-c">
+                Thickess
+              </Form.Label>
+              <Col sm="7">
+                <Form.Control
+                  className="inp-box"
+                  size="lg"
+                  type="number"
+                  placeholder=""
+                  step="1"
+                  min="1"
+                  max="500"
+                  name="height"
+                  value={formData.height}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <small
+                className="description"
+              >
+                This is the height of the hub.
+              </small>
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="formPlaintextPassword"
+            >
+              <Form.Label column sm="5" className="label-c">
+                Hub OD
+              </Form.Label>
+              <Col sm="7">
+                <Form.Control
+                  className="inp-box"
+                  size="lg"
+                  type="number"
+                  placeholder=""
+                  step="1"
+                  min="1"
+                  max={formData.baseradius}
+                  name="outerRadius"
+                  value={formData.outerRadius}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <small
+                className="description"
+              >
+                Recommended size is between 800 to 1500 mm.
+              </small>
+
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="formPlaintextPassword"
+            >
+              <Form.Label column sm="5" className="label-c">
+                Hub ID
+              </Form.Label>
+              <Col sm="7">
+                <Form.Control
+                  className="inp-box"
+                  size="lg"
+                  type="number"
+                  placeholder=""
+                  step="1"
+                  min="1"
+                  max="499"
+                  name="innerRadius"
+                  value={formData.innerRadius}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <small
+                className="description"
+              >
+                Recommended number of plates is between 8 to 15.
+              </small>              </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="formPlaintextPassword"
+            >
+              <Form.Label column sm="5" className="label-c">
+                Base Plate Thickness
+              </Form.Label>
+              <Col sm="7">
+                <Form.Control
+                  className="inp-box"
+                  size="lg"
+                  type="number"
+                  placeholder=""
+                  step="1"
+                  min="1"
+                  max="100"
+                  name="thickness"
+                  value={formData.thickness}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <small
+                className="description"
+                style={{
+
+                }}
+              >
+                Max100
+              </small>
+            </Form.Group>
+          </Form>
+
+        </div>
+        <div className="d-grid gap-2">
+          <div className="btn-downc">
+            <Button
+              onClick={downloadModel}
+              variant="primary"
+              size="lg"
+              className="fly-button"
+            >
+              Download AutoCAD model
+            </Button>
+
+            <div className="download-count">
+              3596+ downloads
             </div>
           </div>
-          <Requirement />
-        </div>
-      </section>
 
-      <section style={{ height: "100vh", width: "60%", paddingTop: "100px" }}>
+      
+
+
+
+        </div>
+
+        <div className="bottom-small">
+          <small>
+            Made with ❤ by Dark Horse Tech!
+          </small>
+          <br />
+          <small><a className="text-dark">Need similar template for your product? Contact Us!</a></small>
+        </div>
+        <Requirement/>
+
+      </section>
+      <section style={{ height: "100vh", width: "55%", borderLeft: "1px solid black" }}>
         {mesh ? (
           <ThreeContext>
             <ReplicadMesh edges={mesh.edges} faces={mesh.faces} />
+
           </ThreeContext>
         ) : (
-          <div className="loading-option">
-            <img src={loading} alt="Loading" className="loading-gif" />
-          </div>
+          <div class="lds-circle"><div></div></div>
         )}
       </section>
     </main>

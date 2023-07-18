@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, GizmoHelper,GizmoViewport  } from "@react-three/drei";
 import * as THREE from "three";
 
 // We change the default orientation - threejs tends to use Y are the height,
@@ -33,6 +33,13 @@ export default function ThreeContext({ children, ...props }) {
       >
         <OrbitControls />
         <ambientLight />
+        <GizmoHelper
+          alignment="bottom-right" // widget alignment within scene
+          margin={[80, 80]} // widget margins (X, Y)
+        >
+          <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
+          {/* alternative: <GizmoViewcube /> */}
+        </GizmoHelper>
         <pointLight position={[100, 100, 100]} />
         {children}
       </Canvas>
