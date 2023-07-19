@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, GizmoHelper,GizmoViewport  } from "@react-three/drei";
+import { OrbitControls, GizmoHelper,GizmoViewport,Grid  } from "@react-three/drei";
 import * as THREE from "three";
 
 // We change the default orientation - threejs tends to use Y are the height,
@@ -17,7 +17,23 @@ THREE.Object3D.DefaultUp.set(0, 0, 1);
 // a matcap material instead of the meshStandardMaterial used here.
 export default function ThreeContext({ children, ...props }) {
   const dpr = Math.min(window.devicePixelRatio, 2);
+  const GridMaterialType = {
+    cellSize: 100,
+    cellThickness: 1.5,
+    cellColor: new THREE.Color("black"),
+    sectionSize: 10,
+    sectionThickness: 1,
+    sectionColor: new THREE.Color("pink"),
+    followCamera: false,
+    infiniteGrid: true,
+    fadeDistance: 10000,
+    fadeStrength: .1,
+  };
 
+  const GridProps = {
+    args: [1000, 10,1000,10], // Customize the grid size as per your needs
+    ...GridMaterialType,
+  };
   return (
     <Suspense fallback={null}>
       <Canvas
@@ -28,9 +44,11 @@ export default function ThreeContext({ children, ...props }) {
         }}
         dpr={dpr}
         frameloop="demand"
-        camera={{ position: [300, 300, 500] }}
+        camera={{ position: [130, 30, 700] }}
         {...props}
       >
+         
+         <Grid rotation={[ Math.PI /2,0,0]} {...GridProps} />
         <OrbitControls />
         <ambientLight />
         <GizmoHelper

@@ -52,9 +52,11 @@ const Requirement = () => {
           variant="secondary"
           size="lg"
           style={{
+            
             paddingRight: "20px",
-            width: "60%",
+            width: "50%",
             fontSize: "25px",
+            marginLeft:"130px",marginTop:"10px",fontFamily:"cursive"
           }}
         >
           Send Information
