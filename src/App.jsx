@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-
+import Modal from "react-bootstrap/Modal";
 import FileSaver from "file-saver";
 import { wrap } from "comlink";
 
@@ -69,6 +69,59 @@ export default function ReplicadApp() {
 
   const generateModel = () => {
     setLatestFormData(formData);
+  };
+
+  const handleContactUsClick = () => {
+    const userFeedback = window.prompt(
+      "Please provide your feedback or any specific requirements you have:"
+    );
+
+    if (userFeedback !== null) {
+      // Here you can use the userFeedback variable to perform actions like sending the feedback to a server, displaying it, etc.
+      // For now, let's just display an alert with the user's input.
+      alert(`Thank you for your feedback:\n${userFeedback}`);
+    }
+  };
+
+
+
+
+  const [user, setUser] = useState({
+    email: "",
+    requirement: "",
+  });
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  const getUserData = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+    
+  };
+
+  const postdata = async (e) => {
+    e.preventDefault();
+
+    const { email, requirement } = user;
+    const res = await fetch(
+      "https://my-app-fb49e-default-rtdb.firebaseio.com/userinfo.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          requirement,
+        }),
+      }
+    );
+    setUser("");
+    setShowPopup(false);
   };
 
   return (
@@ -262,11 +315,57 @@ export default function ReplicadApp() {
           <small>Made with ❤ by Dark Horse Tech!</small>
           <br />
           <small>
-            <a className="text-dark">
+            <a className="text-dark" onClick={togglePopup} >
               Need similar template for your product? Contact Us!
+
+
+              
             </a>
           </small>
+          <Modal show={showPopup} onHide={togglePopup}>
+        <Modal.Header closeButton>
+          <Modal.Title>What are your requirements?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                name="email"
+                value={user.email}
+                onChange={getUserData}
+                autoComplete="off"
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formRequirement">
+              <Form.Label>Requirements</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={4}
+                placeholder="Enter requirements"
+                name="requirement"
+                value={user.requirement}
+                onChange={getUserData}
+                autoComplete="off"
+                required
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={togglePopup}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={postdata}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </div>
+         
         <div className="generate-btn">
         <Button
           onClick={generateModel}
