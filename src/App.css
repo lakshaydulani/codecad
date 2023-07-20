@@ -39,11 +39,10 @@ input {
     border-width: 5px;
     border-color: rgba(255, 0, 0, 0.155);
 
-} */
-
-/* .btn-downc {
-    padding-left: 75px;
-} */
+} 
+.inpdiv{
+    margin-left:3rem;
+  }
 
 .btn-download {
     background-color: rgb(47, 101, 173);
@@ -140,3 +139,13 @@ input {
     font-weight: bold;
     font-size: small;
   }
+.generate-btn{
+    position: fixed;
+    bottom: 40px;
+    width: 55vw;
+    text-align: center;
+    font-weight: bold;
+    right: 57vw;
+  
+    z-index: 1;
+}

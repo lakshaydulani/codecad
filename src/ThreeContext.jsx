@@ -55,7 +55,7 @@ export default function ThreeContext({ children, ...props }) {
           alignment="bottom-right" // widget alignment within scene
           margin={[80, 80]} // widget margins (X, Y)
         >
-          <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
+          <GizmoViewport axisColors={['grey', 'black', 'darkblue']} labelColor="white" />
           {/* alternative: <GizmoViewcube /> */}
         </GizmoHelper>
         <pointLight position={[100, 100, 100]} />

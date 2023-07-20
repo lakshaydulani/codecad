@@ -93,7 +93,7 @@ export default function ReplicadApp() {
                 Number of Blades
               </Form.Label>
 
-              <Col sm="7">
+              <Col sm="6" className="inpdiv">
                 <Form.Control
                   className="inp-box"
                   size="lg"
@@ -106,11 +106,10 @@ export default function ReplicadApp() {
                   value={formData.size}
                   onChange={handleInputChange}
                 />
-                   </Col>
-                <small className="description">
-                  Recommended number of plates is between 8 to 15.
-                </small>
-           
+              </Col>
+              <small className="description">
+                Recommended number of plates is between 8 to 15.
+              </small>
             </Form.Group>
             <Form.Group
               as={Row}
@@ -120,7 +119,7 @@ export default function ReplicadApp() {
               <Form.Label column sm="5" className="label-c">
                 Base Plate Diameter
               </Form.Label>
-              <Col sm="7">
+              <Col sm="6" className="inpdiv">
                 <Form.Control
                   className="inp-box"
                   size="lg"
@@ -146,7 +145,7 @@ export default function ReplicadApp() {
               <Form.Label column sm="5" className="label-c">
                 Thickess
               </Form.Label>
-              <Col sm="7">
+              <Col sm="6" className="inpdiv">
                 <Form.Control
                   className="inp-box"
                   size="lg"
@@ -172,7 +171,7 @@ export default function ReplicadApp() {
               <Form.Label column sm="5" className="label-c">
                 Hub OD
               </Form.Label>
-              <Col sm="7">
+              <Col sm="6" className="inpdiv">
                 <Form.Control
                   className="inp-box"
                   size="lg"
@@ -187,7 +186,7 @@ export default function ReplicadApp() {
                 />
               </Col>
               <small className="description">
-                 Recommended size is between 800 to 1500 mm.
+                Recommended size is between 800 to 1500 mm.
               </small>
             </Form.Group>
             <Form.Group
@@ -198,7 +197,7 @@ export default function ReplicadApp() {
               <Form.Label column sm="5" className="label-c">
                 Hub ID
               </Form.Label>
-              <Col sm="7">
+              <Col sm="6" className="inpdiv">
                 <Form.Control
                   className="inp-box"
                   size="lg"
@@ -224,7 +223,7 @@ export default function ReplicadApp() {
               <Form.Label column sm="5" className="label-c">
                 Base Plate Thickness
               </Form.Label>
-              <Col sm="7">
+              <Col sm="6" className="inpdiv">
                 <Form.Control
                   className="inp-box"
                   size="lg"
@@ -268,6 +267,7 @@ export default function ReplicadApp() {
             </a>
           </small>
         </div>
+        <div className="generate-btn">
         <Button
           onClick={generateModel}
           variant="primary"
@@ -275,13 +275,12 @@ export default function ReplicadApp() {
           style={{
             marginLeft: "165px",
             fontSize: "25px",
-            fontFamily: "cursive",
           }}
         >
-          GenerateModel
+          Generate Model
         </Button>
-
-        <Requirement />
+        </div>
+      
       </section>
       <section
         style={{ height: "100vh", width: "55%", borderLeft: "1px solid black" }}
