@@ -312,7 +312,7 @@ export default function ReplicadApp() {
         </div>
 
         <div className="bottom-small">
-          <small>Made with ❤ by Dark Horse Tech!</small>
+          <small>Made with ❤ by Lakshay Dulani</small>
           <br />
           <small>
             <a className="text-dark" onClick={togglePopup} >
