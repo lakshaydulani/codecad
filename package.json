@@ -21,7 +21,7 @@
     "replicad": "^0.15.1",
     "replicad-opencascadejs": "^0.15.0",
     "replicad-threejs-helper": "^0.15.0",
-    "three": "0.149.0"
+    "three": "0.148.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "3.0.1",
